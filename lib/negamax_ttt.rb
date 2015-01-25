@@ -1,0 +1,7 @@
+require "pathname"
+require Pathname(__dir__) + "negamax_ttt" + "board.rb"
+require Pathname(__dir__) + "negamax_ttt" + "players" + "human_player.rb"
+require Pathname(__dir__) + "negamax_ttt" + "players" + "beatable_ai_player.rb"
+require Pathname(__dir__) + "negamax_ttt" + "players" + "unbeatable_ai_player.rb"
+require Pathname(__dir__) + "negamax_ttt" + "runner.rb"
+require Pathname(__dir__) + "negamax_ttt" + "configuration.rb"
