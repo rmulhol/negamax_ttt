@@ -4,6 +4,7 @@ require Pathname(__dir__) + "players" + "human_player.rb"
 require Pathname(__dir__) + "players" + "beatable_ai_player.rb"
 require Pathname(__dir__) + "players" + "unbeatable_ai_player.rb"
 
+
 class Configuration
   attr_reader :user_interface, :game_configuration
 
