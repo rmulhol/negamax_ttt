@@ -6,7 +6,7 @@ This is a ruby gem that provides an engine for playing tic tac toe with multiple
 ##How to Use
 To use this gem, add it to your gemfile and run `bundle install`. 
 
-Once the gem has been installed, set up a user interface and pass it to `Configuration.new`. Calling `configure_game` on the configuration object you just initialized will set up a (properly configured) runner.  Call `.run` on the runner object to execute the game. 
+Set up a user interface and pass it to `Configuration.new`, calling `configure_game` on the object returned to set up a runner.  Call `.run` on the runner to execute the game. 
 
 See "Necessary UI Methods" below for information regarding UI requirements for using this gem.
 
@@ -36,7 +36,13 @@ Takes a board object and displays the current state of the board with player mov
 Prompts the user to select their next move.
 
 #####UI#get_validated_input(move_prompt, valid_moves)
-Takes two procs/lambdas where the first delivers a promt to the user to select a move and the second checks that the move entered by the user is valid (i.e. denotes an available space). Returns the validated input entered by the user. 
+Takes two procs/lambdas: (1) a promt (e.g. request_move()), and (2) a condition that validates user input (e.g. checks that a move selected by the user corresponds to an open space). Returns the validated input entered by the user. 
+
+#####UI#announce_outcome(winner)
+Takes the game winner. Announces tie game if winner == :tie; otherwise announces game winner.
 
 #####UI#play_again?()
 Returns a boolean indicating whether another game should be initiated. `true` begins another game and `false` closes the program.
+
+##Example Implementation
+To see an example command line implementation of tic tac toe using this gem, check out https://github.com/rmulhol/ruby_tic_tac_toe

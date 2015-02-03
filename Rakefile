@@ -1,5 +1,5 @@
 require "rake/testtask"
 
 Rake::TestTask.new do |t|
-  t.pattern = "test/*/*_test.rb"
+  t.test_files = ["test/negamax_ttt/*_test.rb", "test/negamax_ttt/*/*_test.rb"]
 end

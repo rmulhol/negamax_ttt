@@ -1,6 +1,8 @@
 require "minitest/autorun"
 require "pathname"
-require Pathname(__dir__).parent.parent + "lib" + "players" + "human_player.rb"
+require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "players" + "human_player.rb"
+require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "board.rb"
+require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "rules.rb"
 require Pathname(__dir__).parent + "mocks" + "mock_ui.rb"
 
 class HumanPlayerTest < Minitest::Test
@@ -21,8 +23,8 @@ class HumanPlayerTest < Minitest::Test
     board_with_spaces_claimed.place_move(1, "X")
     board_with_spaces_claimed.place_move(2, "O")
 
-    assert_equal 1, human_player_with_valid_input.get_move(empty_board)
-    assert_equal 2, human_player_with_invalid_input.get_move(empty_board)
-    assert_equal 3, human_player_with_input_for_claimed_spaces.get_move(board_with_spaces_claimed)
+    assert_equal 1, human_player_with_valid_input.get_move(Rules.new(empty_board))
+    assert_equal 2, human_player_with_invalid_input.get_move(Rules.new(empty_board))
+    assert_equal 3, human_player_with_input_for_claimed_spaces.get_move(Rules.new(board_with_spaces_claimed))
   end
 end

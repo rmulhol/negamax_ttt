@@ -6,9 +6,9 @@ class HumanPlayer
     @user_interface = user_interface
   end
 
-  def get_move(board)
+  def get_move(rules)
     move_prompt = lambda { user_interface.request_move }
-    valid_moves = lambda { |move| board.open_spaces.include?(move.to_i) }
+    valid_moves = lambda { |move| rules.board.open_spaces.include?(move.to_i) }
     move = user_interface.get_validated_input(move_prompt, valid_moves)
     move.to_i
   end

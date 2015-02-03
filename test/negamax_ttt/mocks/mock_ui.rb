@@ -15,8 +15,8 @@ class MockUI
     player_2_move_signature = @input.shift
 
     { board_side_length: board_side_length.to_i, 
-      player_1: { player_type: player_1_type.to_sym, move_signature: player_1_move_signature}, 
-      player_2: { player_type: player_2_type.to_sym, move_signature: player_2_move_signature} }
+      player_1: { type: player_1_type.to_sym, move_signature: player_1_move_signature}, 
+      player_2: { type: player_2_type.to_sym, move_signature: player_2_move_signature} }
   end
 
   def get_validated_input(prompt, condition)

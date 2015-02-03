@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require "pathname"
 require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "players" + "unbeatable_ai_player.rb"
+require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "rules.rb"
 require Pathname(__dir__).parent.parent.parent + "lib" + "negamax_ttt" + "board.rb"
 
 class UnbeatableAiPlayerTest < Minitest::Test
@@ -16,13 +17,13 @@ class UnbeatableAiPlayerTest < Minitest::Test
     board_with_potential_X_win.place_move(4, "O")
     board_with_potential_X_win.place_move(2, "X")
     
-    assert_equal 3, @unbeatable_ai_player_as_X.get_move(board_with_potential_X_win), "get_move should claim win if available"
-    assert_equal 3, @unbeatable_ai_player_as_O.get_move(board_with_potential_X_win), "get_move should block loss if loss possible on next move and no winning option"
+    assert_equal 3, @unbeatable_ai_player_as_X.get_move(Rules.new(board_with_potential_X_win)), "get_move should claim win if available"
+    assert_equal 3, @unbeatable_ai_player_as_O.get_move(Rules.new(board_with_potential_X_win)), "get_move should block loss if loss possible on next move and no winning option"
 
     board_with_potential_win_for_both_X_and_O = board_with_potential_X_win
     board_with_potential_win_for_both_X_and_O.place_move(5, "O")
 
-    assert_equal 3, @unbeatable_ai_player_as_X.get_move(board_with_potential_win_for_both_X_and_O), "get_move should claim win if separate win and loss blocking moves are available"
+    assert_equal 3, @unbeatable_ai_player_as_X.get_move(Rules.new(board_with_potential_win_for_both_X_and_O)), "get_move should claim win if separate win and loss blocking moves are available"
 
     board_with_possible_fork = Board.new(3)
     board_with_possible_fork.place_move(1, "X")
@@ -31,7 +32,7 @@ class UnbeatableAiPlayerTest < Minitest::Test
 
     fork_blocking_moves = [2, 4, 6, 8]
 
-    assert_includes fork_blocking_moves, @unbeatable_ai_player_as_O.get_move(board_with_possible_fork), "get_move should block fork if no win or loss blocking move available"
+    assert_includes fork_blocking_moves, @unbeatable_ai_player_as_O.get_move(Rules.new(board_with_possible_fork)), "get_move should block fork if no win or loss blocking move available"
   end
 
   def test_score_board
@@ -42,10 +43,10 @@ class UnbeatableAiPlayerTest < Minitest::Test
 
     board_without_win = Board.new(3)
 
-    assert_equal 10, @unbeatable_ai_player_as_X.score_board(board_with_X_win, "O"), "score_board should return 10 if either player wins"
-    assert_equal 10, @unbeatable_ai_player_as_O.score_board(board_with_X_win, "X"), "score_board should return 10 if either player wins"
+    assert_equal 10, @unbeatable_ai_player_as_X.score_board(Rules.new(board_with_X_win), "O"), "score_board should return 10 if either player wins"
+    assert_equal 10, @unbeatable_ai_player_as_O.score_board(Rules.new(board_with_X_win), "X"), "score_board should return 10 if either player wins"
 
-    assert_equal 0, @unbeatable_ai_player_as_X.score_board(board_without_win, "X"), "score_board should return 0 if neither player has won"
+    assert_equal 0, @unbeatable_ai_player_as_X.score_board(Rules.new(board_without_win), "X"), "score_board should return 0 if neither player has won"
   end
 
   def test_get_opponent

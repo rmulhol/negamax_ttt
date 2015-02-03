@@ -14,19 +14,6 @@ class Board
     board.select { |key, value| value.nil? }.keys
   end
 
-  def game_over?(player_1_move_signature, player_2_move_signature)
-    open_spaces.empty? || player_wins?(player_1_move_signature) || player_wins?(player_2_move_signature)
-  end
-
-  def player_wins?(move_signature)
-    winning_combinations.any? do |winning_combination|
-      board.select do |key, value|
-        winning_combination.include?(key) && value == move_signature
-      end
-      .length == side_length
-    end
-  end
-
   def clear_board
     (1..size).each do |key|
       place_move(key, nil)
@@ -34,10 +21,6 @@ class Board
   end
 
   # private
-
-  def winning_combinations
-    rows + columns + diagonals
-  end
 
   def rows
     (1..board.size).each_slice(side_length).to_a

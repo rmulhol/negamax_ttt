@@ -1,5 +1,6 @@
 require "pathname"
 require Pathname(__dir__) + "board.rb"
+require Pathname(__dir__) + "rules.rb"
 require Pathname(__dir__) + "players" + "human_player.rb"
 require Pathname(__dir__) + "players" + "beatable_ai_player.rb"
 require Pathname(__dir__) + "players" + "unbeatable_ai_player.rb"
@@ -15,9 +16,10 @@ class Configuration
   def configure_game
     game_configuration = user_interface.get_game_configuration
     board = Board.new(game_configuration.fetch(:board_side_length))
+    rules = Rules.new(board)
     player_1 = player(game_configuration.fetch(:player_1))
     player_2 = player(game_configuration.fetch(:player_2))
-    Runner.new(user_interface, board, player_1, player_2)
+    Runner.new(user_interface, rules, player_1, player_2)
   end
 
   def player(player)

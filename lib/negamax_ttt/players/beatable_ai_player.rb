@@ -5,11 +5,11 @@ class BeatableAiPlayer
     @move_signature = move_signature
   end
 
-  def get_move(board)
+  def get_move(rules)
     prng = Random.new
-    move = prng.rand(1..board.size)
-    until board.open_spaces.include? move
-      move = prng.rand(1..board.size)
+    move = prng.rand(1..rules.board.size)
+    until rules.board.open_spaces.include? move
+      move = prng.rand(1..rules.board.size)
     end
     move
   end

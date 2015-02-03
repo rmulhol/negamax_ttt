@@ -38,15 +38,15 @@ class ConfigurationTest < Minitest::Test
     assert_instance_of BeatableAiPlayer, cvc_game.player_1, "configure_game should return a runner with an ai player as player 1 in a CvC game"
     assert_instance_of UnbeatableAiPlayer, cvc_game.player_2, "configure_game should return a runner with an ai player as player 2 in a CvC game"
 
-    assert_equal 3, hvh_game.board.side_length, "configure_game should return a runner with a 3x3 board if :board_side_length is 3"
-    assert_equal 4, hvc_game.board.side_length, "configure_game should return a runner with a 4x4 board if :board_side_length is 4"
-    assert_equal 5, cvc_game.board.side_length, "configure_game should return a runner with a 5x5 board if :board_side_length is 5"
+    assert_equal 3, hvh_game.rules.board.side_length, "configure_game should return a runner with a 3x3 board if :board_side_length is 3"
+    assert_equal 4, hvc_game.rules.board.side_length, "configure_game should return a runner with a 4x4 board if :board_side_length is 4"
+    assert_equal 5, cvc_game.rules.board.side_length, "configure_game should return a runner with a 5x5 board if :board_side_length is 5"
   end
 
   def test_player
-    human_player_settings =  { player_type: :human_player, move_signature: "X" }
-    beatable_ai_player_settings = { player_type: :beatable_ai_player, move_signature: "X" }
-    unbeatable_ai_player_settings = { player_type: :unbeatable_ai_player, move_signature: "X" }
+    human_player_settings =  { type: :human_player, move_signature: "X" }
+    beatable_ai_player_settings = { type: :beatable_ai_player, move_signature: "X" }
+    unbeatable_ai_player_settings = { type: :unbeatable_ai_player, move_signature: "X" }
 
     assert_instance_of HumanPlayer, @config.player(human_player_settings), "player should return a human player if :player_type is :human_player"
     assert_instance_of BeatableAiPlayer, @config.player(beatable_ai_player_settings), "player should return a beatable ai player if :player_type is :beatable_ai_player"
